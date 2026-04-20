@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import express from 'express'
-
-import { corsMiddleware, createRateLimiter, helmetMiddleware } from './config/security'
+import { corsMiddleware, corsOptions, createRateLimiter, helmetMiddleware } from './config/security'
 import { errorMiddleware } from './middleware/error.middleware'
 import { loggingMiddleware, requestIdMiddleware } from './middleware/logging.middleware'
 import { router } from './routes'
@@ -16,6 +16,7 @@ export const createApp = () => {
   app.use(cookieParser())
   app.use(requestIdMiddleware)
   app.use(loggingMiddleware)
+  app.options('*', cors(corsOptions))
 
   // Global rate limiter; can be refined per-route
   app.use(createRateLimiter())

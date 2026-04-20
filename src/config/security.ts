@@ -7,7 +7,6 @@ import { env } from './env'
 export const corsOptions: CorsOptions = {
   origin: [
     'https://zebeng.co.kr',
-    "https://api.zebeng.co.kr",
     'http://localhost:5173',
   ],
   credentials: true,
