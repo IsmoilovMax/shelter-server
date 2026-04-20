@@ -1,15 +1,20 @@
-import cors, { CorsOptions } from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
+import cors, { CorsOptions } from 'cors'
+import rateLimit from 'express-rate-limit'
+import helmet from 'helmet'
 
-import { env } from './env';
+import { env } from './env'
 
 export const corsOptions: CorsOptions = {
-  origin: env.CORS_ORIGIN === '*' ? '*' : env.CORS_ORIGIN.split(','),
+  origin: [
+    'https://zebeng.co.kr',
+    'http://localhost:5173',
+  ],
   credentials: true,
-};
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+}
 
-export const helmetMiddleware = helmet();
+
+export const helmetMiddleware = helmet()
 
 export const createRateLimiter = () =>
   rateLimit({
@@ -17,7 +22,7 @@ export const createRateLimiter = () =>
     max: Number(env.RATE_LIMIT_MAX),
     standardHeaders: true,
     legacyHeaders: false,
-  });
+  })
 
 export const corsMiddleware = cors(corsOptions);
 
