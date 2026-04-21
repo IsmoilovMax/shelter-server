@@ -14,7 +14,6 @@ export const createApp = () => {
 
   // 🔥 2. CORS (ONLY ONCE)
   app.use(cors(corsOptions))
-  app.options('*', cors(corsOptions))
 
   // 🔥 3. parsers
   app.use(express.json())
